@@ -1,7 +1,7 @@
 # Es6-Es11
-EcmaScript6-11常用语法以及场景Demo。
-![image](https://github.com/19Qingfeng/Es6-Es11/blob/master/img/ECMAScript2015(ES6).png)
-
+EcmaScript6-11常用语法以及场景Demo。<br>
+![ECMAScript2015_ES6_.png](https://i.loli.net/2020/08/14/IKn89JpoZX6YGbv.png)
+<br>
 1. EcmaScript6
 + 函数
 + 数组
