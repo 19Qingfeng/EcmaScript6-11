@@ -1,6 +1,6 @@
 # Es6-Es11
 EcmaScript6-11常用语法以及场景Demo。
-![avatar](https://git.imooc.com/coding-444/imooc-es-mind/raw/master/ECMAScript2016~2020%20%28ES7~11%29.png)
+![avatar](https://github.com/19Qingfeng/Es6-Es11/blob/master/img/ECMAScript2015(ES6).png)
 
 1. EcmaScript6
 + 函数
