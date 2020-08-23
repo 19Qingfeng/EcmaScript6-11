@@ -1,0 +1,52 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add --dev html-webpack-plugin
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  12.18.2
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/Users/wanghaoyu/Library/Caches/Yarn/v6/npm-inherits-2.0.1-b17d08d326b4423e568eff719f91b0b1cbdf69f1-integrity/node_modules/inherits/LICENSE' -> '/Users/wanghaoyu/Desktop/EcmaScript6-11/node_modules/assert/node_modules/inherits/LICENSE'
+
+npm manifest: 
+  {
+      "name": "es2020",
+      "version": "1.0.0",
+      "description": "ES6-11.",
+      "main": "index.js",
+      "scripts": {
+          "start": "webpack-dev-server",
+          "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "repository": {
+          "type": "git",
+          "url": "git+https://github.com/19Qingfeng/EcmaScript6-11.git"
+      },
+      "keywords": [
+          "situation123."
+      ],
+      "author": "wang.haoyu",
+      "license": "ISC",
+      "bugs": {
+          "url": "https://github.com/19Qingfeng/EcmaScript6-11/issues"
+      },
+      "homepage": "https://github.com/19Qingfeng/EcmaScript6-11#readme",
+      "devDependencies": {
+          "webpack": "^4.44.1",
+          "webpack-cli": "^3.3.12"
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

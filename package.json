@@ -1,0 +1,36 @@
+{
+  "name": "es2020",
+  "version": "1.0.0",
+  "description": "ES6-11.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "compile": "webpack --config webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/19Qingfeng/EcmaScript6-11.git"
+  },
+  "keywords": [
+    "situation123."
+  ],
+  "author": "wang.haoyu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/19Qingfeng/EcmaScript6-11/issues"
+  },
+  "homepage": "https://github.com/19Qingfeng/EcmaScript6-11#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.10.4"
+  }
+}
