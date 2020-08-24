@@ -94,7 +94,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
         8. Array.prototype.values()/keys()/entries():返回的都是Iterator，可以用for of进行处理。
 
-* Function
+* Function(4.js)
 
     1. 默认参数,默认参数也可以结合解构赋值在进行默认值处理。(undefined or null 走默认参数)
 
@@ -115,7 +115,27 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
     
 
-* 正则
+* Object(5.js)
+
+    1. 属性简洁表示法。
+
+    
+
+    2. 属性名表达式。
+
+    3. Object.is():替代===，解决NaN问题。
+
+    4. Object.assign() 方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象，它将返回目标对象。(浅拷贝)
+
+    5. 对象的遍历方式。结合ES5一切复习了吧：
+        1. for...in。(不包括不可枚举属性,会遍历出原型属性)
+
+        2. Object.keys()用于返回对象所有key组成的数组。(不可获得不可枚举属性,仅自身属性)
+
+        3. Object.getOwnPropertyNames()用于返回对象所有key组成的数组。(仅自身属性，包括不可枚举属性)
+
+        4. Reflect.ownKeys()用于返回对象所有key组成的数组。(包括不可枚举属性，包括方法属性)
+
 * 字符串
 * Symbol
 * Set
