@@ -8,7 +8,9 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 ## EcmaScript6
 
-* 块级作用域，let，const。(Demo1)<font size=2 >
+<font size=2 >
+
+* 块级作用域，let，const。(Demo1)
     1. let
         1. let 声明的全局变量不是全局对象window的属性
         2. 同一作用域中用let定义变量不允许重复声明
@@ -19,7 +21,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
         1. const定义的是常亮，不可修改。
         2. const 实际上保证的并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动。</font>
 
-* 解构赋值<font size=2 >
+* 解构赋值
     1. 赋值元素可以是任意可遍历的对象
     2. 被赋值的变量还可以是对象的属性，不局限于单纯的变量。
     3. 循环体。
@@ -27,8 +29,8 @@ EcmaScript6-11常用语法以及场景Demo。<br>
     5. rest参数。（剩余数组 or 剩余Object，放在最后一位）。
     6. 默认值。
     7. 重命名。（对于Object的解构）
-    8. 字符串也可以解构。（Array形式接受）</font>
-* 数组<font size=2 >
+    8. 字符串也可以解构。（Array形式接受）
+* 数组
     1. Es5中的一些数组方法。
         1. for循环。
         2. forEach:无返回值，break和container会报错。
@@ -52,7 +54,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
             1. A:原有数组开启替换的位置。（Y）
             2. B:原有数组需要进行替换取值的开始点。（N）不填从第0个开始，负数从倒数开始。
             3. C:原有数组需要进行替换取值的结束点。（N）不填一直到结束，负数同理。
-        8. Array.prototype.values()/keys()/entries():返回的都是Iterator，可以用for of进行处理。</font>
+        8. Array.prototype.values()/keys()/entries():返回的都是Iterator，可以用for of进行处理。
 * 对象
 * 正则
 * 字符串
@@ -66,3 +68,5 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 * Promise
 * Generator
 * Iterator
+
+</font>
