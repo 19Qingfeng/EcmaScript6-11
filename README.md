@@ -136,7 +136,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
         4. Reflect.ownKeys()用于返回对象所有key组成的数组。(包括不可枚举属性，包括方法属性)
 
-* Class
+* Class(6.js)
     1. set and get关键字。
         1. 只读属性。
 
@@ -164,6 +164,47 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 > 对于面向对象编程而言，更关注类的声明、属性、方法、静态方法、继承、多态、私有属性。
 
 * Symbol
+
+    1. 声明方式：基本数据类型:let a = Symbol(description);
+
+    > Symbol()声明一个独一无二的Symbol.
+
+    2. Symbol.for()
+
+    > Symbol.for() 接受一个字符串作为参数，然后搜索有没有以该参数作为名称的 Symbol 值。如果有，就返回这个 Symbol 值，否则就新建一个以该字符串为名称的 Symbol 值，并将其注册到全局。
+
+    > Symbol.for()与Symbol()这两种写法，都会生成新的 Symbol。它们的区别是，前者会被登记在全局环境中供搜索，后者不会。Symbol.for()不会每次调用就返回一个新的 Symbol 类型的值，而是会先检查给定的key是否已经存在，如果不存在才会新建一个值。
+
+    > Symbol.for()会生成一个全局的Symbol，会和之前for生成的Symbol进行覆盖，所以他们是相等的，参见Demo。
+
+    4. Symbol.keyFor(symbol):返回一个全局已登记的描述。
+
+    > keyFor只能获得for声明全局Symbol的描述。无法获得Symbol的描述。
+
+    3. Symbol.prototype.description：实例属性，获得Symbol生成时候的描述。(这个其实是ES10加入的)
+
+    > description()可以获得Symbol()声明以及Symbol.for()声明的描述，两个都可以。
+
+    - 日常项目中对于Symbol的实际运用。(见Demo)
+
+        
+
+        1. 独立属性名:解决对象名称冲突-可计算属性名配合Symbol。
+
+        2. 属性遍历:Symbol定义key值的属性名无法通过Object.keys,for in遍历到。通过Object.getOwnPropertySymbol()仅仅可以获取对象上通过Symbol定义的属性。Reflect.ownKeys()可以获取全部。(常规遍历无法获取)
+
+        3. 消除项目中魔幻字符串:魔术字符串指的是，在代码之中多次出现、与代码形成强耦合的某一个具体的字符串或者数值。风格良好的代码，应该尽量消除魔术字符串，改由含义清晰的变量代替。(并不关心内容，所以使用Symbol()保证独一无二代替字符串)
+
+  
+
+    
+
+   
+
+> ES6 引入了一种新的原始数据类型 Symbol ，表示独一无二的值。它是 JavaScript 语言的第七种数据类型，前六种是：undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。
+
+> Symbol 值通过Symbol函数生成。这就是说，对象的属性名现在可以有两种类型，一种是原来就有的字符串，另一种就是新增的 Symbol 类型。凡是属性名属于 Symbol 类型，就都是独一无二的，可以保证不会与其他属性名产生冲突。
+
 * Set
 * Map
 * 解构赋值
