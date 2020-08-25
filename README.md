@@ -69,6 +69,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
     2. ES6对于数组方法的扩展。
         1. for of:迭代Array，因为Array内置了[Symbol.iterator]()所以可迭代。(字符串也支持，自定义对象实现迭代方法也可以forof)。
+        > for of中也存在break和continue以及return，return和break都是直接终止循环。
 
         2. Array.from(A,B,C):将类数组对象转成数组。(伪数组具备两个特征，1. 按索引方式储存数据 2. 具有length属性。参考Demo可以有一些更高级的用法)
             1. A：伪数组对象。
