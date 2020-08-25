@@ -136,7 +136,33 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
         4. Reflect.ownKeys()用于返回对象所有key组成的数组。(包括不可枚举属性，包括方法属性)
 
-* 字符串
+* Class
+    1. set and get关键字。
+        1. 只读属性。
+
+        2. 私有属性访问限制。
+
+    2. 静态方法:static关键字。
+
+        > Tip:class关键字目前仅支持static声明静态方法，静态属性仍需要类.xx实现。
+        
+
+    3. 继承:extends关键字。
+
+        > 其实extends关键字相当于ES5原型继承和构造继承的结合体。内部实现原理：
+
+        1. 子类constructor中call调用父类-构造继承。
+
+        2. 子类.prototype = new 父类-原型继承。
+
+        3. 继承父类实例方法-可以通过子类.xx调用父类构造方法。
+
+        4. super():ES6的继承extends必须要在父类的constructor中显示的调用super(params),params是传递给父类构造函数的参数。
+
+    
+
+> 对于面向对象编程而言，更关注类的声明、属性、方法、静态方法、继承、多态、私有属性。
+
 * Symbol
 * Set
 * Map
