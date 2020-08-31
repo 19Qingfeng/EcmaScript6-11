@@ -30,6 +30,8 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
         2. const 实际上保证的并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动。</font>
 
+---
+
 * 解构赋值(2.js)
 
     1. 赋值元素可以是任意可遍历的对象
@@ -47,6 +49,8 @@ EcmaScript6-11常用语法以及场景Demo。<br>
     7. 重命名。（对于Object的解构）
 
     8. 字符串也可以解构。（Array形式接受）
+
+---
 
 * 数组(3.js)
 
@@ -69,6 +73,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
     2. ES6对于数组方法的扩展。
         1. for of:迭代Array，因为Array内置了[Symbol.iterator]()所以可迭代。(字符串也支持，自定义对象实现迭代方法也可以forof)。
+
         > for of中也存在break和continue以及return，return和break都是直接终止循环。
 
         2. Array.from(A,B,C):将类数组对象转成数组。(伪数组具备两个特征，1. 按索引方式储存数据 2. 具有length属性。参考Demo可以有一些更高级的用法)
@@ -95,6 +100,8 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
         8. Array.prototype.values()/keys()/entries():返回的都是Iterator，可以用for of进行处理。
 
+---
+
 * Function(4.js)
 
     1. 默认参数,默认参数也可以结合解构赋值在进行默认值处理。(undefined or null 走默认参数)
@@ -116,6 +123,8 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
     
 
+---
+
 * Object(5.js)
 
     1. 属性简洁表示法。
@@ -136,6 +145,8 @@ EcmaScript6-11常用语法以及场景Demo。<br>
         3. Object.getOwnPropertyNames()用于返回对象所有key组成的数组。(仅自身属性，包括不可枚举属性)
 
         4. Reflect.ownKeys()用于返回对象所有key组成的数组。(包括不可枚举属性，包括方法属性)
+
+---
 
 * Class(6.js)
     1. set and get关键字。
@@ -206,7 +217,91 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 > Symbol 值通过Symbol函数生成。这就是说，对象的属性名现在可以有两种类型，一种是原来就有的字符串，另一种就是新增的 Symbol 类型。凡是属性名属于 Symbol 类型，就都是独一无二的，可以保证不会与其他属性名产生冲突。
 
+---
+
 * Set
+
+> 在 JavaScript 里通常使用 Array 或 Object 来存储数据。但是在频繁操作数据的过程中查找或者统计并需要手动来实现，并不能简单的直接使用。 比如如何保证 Array 是去重的，如何统计 Object 的数据总数等，必须自己去手动实现类似的需求，不是很方便。 在 ES6 中为了解决上述痛点，新增了数据结构 Set 和 Map，它们分别对应传统数据结构的“集合”和“字典”。首先，我们先来学习下 Set 数据结构。
+
+> 频繁的数据操作set比Array性能会好很多。
+
+###### 生成set
+
+``` 
+let s = new Set()
+let s = new Set([1, 2, 3, 4])
+```
+
+> 初始化的参数必须是可遍历的，可以是数组或者自定义遍历的数据结构(Symbol.iterator)。
+
+###### 添加数据
+
+``` 
+s.add('hello')
+s.add('goodbye')
+s.add('hello').add('goodbye')
+```
+
+> Set 数据结构不允许数据重复，所以添加重复的数据是无效的
+
+###### 删除数据
+
+``` 
+// 删除指定数据
+s.delete('hello') // true
+// 删除全部数据
+s.clear()
+```
+
+###### 统计数据
+
+> Set 可以快速进行统计数据，如数据是否存在、数据的总数
+
+``` 
+// 判断是否包含数据项，返回 true 或 false
+s.has('hello') // true
+// 计算数据项总数
+s.size // 2
+```
+
+###### 应用场景
+
+* 数组去重
+
+* 合并去重
+
+* 交集
+
+* 差集
+
+* Set遍历方式
+
+    1. keys()：返回键名的遍历器
+    2. values()：返回键值的遍历器
+    3. entries()：返回键值对的遍历器
+    4. forEach()：使用回调函数遍历每个成员
+    5. for...of：可以直接遍历每个成员
+
+#### WeakSet
+
+weakSet
+
+``` 
+weakSet只能够存储对象，不能遍历。
+let ws = new WeakSet()
+ws.add({
+
+    imooc:"wanghaoyu"
+
+})
+console, log(ws) // { imooc:"wanghaoyu" }
+// 同样具有add，delete，has, 没有size和clear方法
+```
+
+> weakSet是若引用对象，也就是垃圾回收机制并不会考虑weakSet。 
+
+当一个对象除了WeakSet被引用到时候就会被垃圾回收。
+
 * Map
 * 解构赋值
 * rest参数和扩展运算符
