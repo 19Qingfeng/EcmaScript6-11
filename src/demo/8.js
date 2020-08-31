@@ -24,13 +24,10 @@ const mergeSet = arr4.filter(i => {
 
 // 差集 
 // 第一个有第二个没有 第二个有第一个没有
-const arr7 = [8, 9, 10]
-const arr8 = [11, 7, 9]
-
-const set7 = new Set(arr4)
-const set8 = new Set(arr5)
-
-const nSet7 = set7.filter(i => !set8.has(i))
-const nSet8 = set8.filter(i => !set7.has(i))
-
-const result = [...nSet7, ...nSet8]
+const arr1 = [1, 2, 3, 4]
+const arr2 = [4, 5, 6, 7, 1, 1]
+let arr3 = new Set(arr1.filter(item => !s2.has(item)))
+let arr4 = new Set(arr2.filter(item => !s1.has(item)))
+console.log(arr3)
+console.log(arr4)
+console.log([...arr3, ...arr4])
