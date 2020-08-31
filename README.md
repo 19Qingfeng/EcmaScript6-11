@@ -408,9 +408,29 @@ map.set(null, 2)
 * String
     - Unicode表示法: 只要将码点放入大括号，就能正确解读该字符。
 
-``` 
-    "\u{20BB7}" // "𠮷"
-```
+    - 遍历器接口:ES6 为字符串添加了遍历器接口，详见Iterator一节，使得字符串可以被for...of循环遍历。
+
+    - 模板字符串
+
+    - String.prototype.fromCodePoint()
+
+    > 用于从 Unicode 码点返回对应字符，并且可以识别大于0xFFFF的字符。
+
+    - String.prototype.includes()
+
+    > ES6提供了includes方法来判断一个字符串是否包含在另一个字符串中，返回boolean类型的值。
+
+    - String.prototype.startsWith()
+
+    > 判断参数字符串是否在原字符串的头部, 返回boolean类型的值。
+
+    - String.prototype.endsWith()
+
+    > 判断参数字符串是否在原字符串的尾部, 返回boolean类型的值。
+
+    - String.prototype.repeat()
+
+    > repeat方法返回一个新字符串，表示将原字符串重复n次。
 
 * rest参数和扩展运算符
 * 类与继承
