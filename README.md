@@ -535,6 +535,69 @@ map.set(null, 2)
     
 
 * Proxy与Reflect
+
+> 调用new Proxy()可以创建代替其他目标(target)对象的代理，它虚拟化了目标，所以两者看起来功能一致。 
+
+> 代理可以拦截JavaScript引擎内部目标的底层对象操作，这些底层操作被拦截后会触发相应特定操作的陷阱函数。（钩子函数Hook） 
+
+> 反射API以Reflect对象的形式出现，对象中方法的默认特性与相同的底层操作一致，而代理可以覆写这些操作，每个代理陷阱对应一个命名和参数都相同的Reflect方法。 
+
+![代理和反射](http://note.youdao.com/yws/res/18292/WEBRESOURCEc22ab214e4f839061348f3d25fa6fac4?ynotemdtimestamp=1598930852161)
+
+**关于Proxy和Object.defineProperty()对于数组的劫持**
+
+<br>
+
+**以及对于Vue为什么不可以实现数组的数据响应式劫持解释**
+
+> 无论是Object.defineProperty()还是new Proxy()对于数组的代理，数字的原本方法比如push(), pop(), shift()等这些方法是可以不被拦截的，所以这也就Vue底层对于数组的监听在原型上重写了这些方法(变异方法，做到数据响应式)。（虽然Vue不支持对于数组下标形式的修改，但是这两种方式显然是支持数组下标的拦截的。） 
+
+<br>
+
+> 为什么不用数组的拦截并不是不支持而是->参见github上尤大的回答。
+
+<br>
+
+![github](https://note.youdao.com/yws/res/18257/WEBRESOURCE6a610a76fada1879d03ae859fa3e7703?ynotemdtimestamp=1598930852161)
+
+    - 常见拦截器:(详细见Demo)
+
+    
+
+    - get(target, key, receiver) 拦截 -> 默认Reflect.get(target, key, receiver)
+
+    - set(target, key, value, receiver)拦截 -> 默认 Reflect.set(target, key, value, receiver)
+
+    
+
+    - has(target,key) 拦截 -> 默认 Reflect.has(target,key) （对于in拦截）
+
+    - ownKeys(target) 拦截 -> Refelect.ownKeys(target)
+
+    > ownKeys陷阱唯一接收的参数事操作的目标，返回值必须是一个数组或者类数组对象，否则就会抛出错误。当调用for of,Object.keys(),Object.getOwnPropertyNames(),Object.getOwnPropertySymbols()或者Object.assign()以及for in方法的时候，可以用ownKeys陷阱过滤不想使用的属性键。
+
+    - deleteProperty(target, key)陷阱拦截删除 -> Reflect.deleteProperty(target, key)
+
+    > ES5中删除属性delete属性操作符，成功返回true，不成功返回false，严格模式下会报错。配置Object.defineProperty(obj,'xx',{ configurable:false })设置属性不可以配置也就不可以删除了。
+
+    > ES6中可以使用代理Proxy代理deleteProperty()来改变这个行为。（不可删除，被拦截的需要返回false）
+
+**深入浅出ES6对于函数的解释**
+
+> 函数有两个内部方法[call]和[construct], apply陷阱和constructor陷阱可以复写这些内部方法，若使用new操作符调用函数，则执行construct方法。则会执行construct陷阱。 若不用则调用call方法。执行会执行apply陷阱(以及apply，call调用函数都会进入apply陷阱)。
+
+> 小Tips：注意apply和construct陷阱的写法是x:()=> {} 函数写法，其他属性陷阱是a() {} 写法。
+
+    - 函数的拦截
+
+    - apply(target,thisArg,argumentsList)陷阱对于函数的拦截。 -> Reflect.apply(target,this.Arg,argumentsList)
+
+    > 非new调用的函数陷阱拦截。thisAra:函数被调用时this的指向,argumentsList:传递给函数的参数数组。
+
+    - constructor(target,argumentList,newTarget)陷阱 -> Reflect.constructor(target,argumentList,newTarget)
+
+    > new 调用constructor时触发constructor陷阱。target被代理的class类,argumentList:参数列表，array。newTarget:new 调用时命令指向的构造函数(new实例时候的构造函数)。
+
 * Promise
 * Generator
 * Iterator
