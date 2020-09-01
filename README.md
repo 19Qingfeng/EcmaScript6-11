@@ -542,7 +542,7 @@ map.set(null, 2)
 
 > 反射API以Reflect对象的形式出现，对象中方法的默认特性与相同的底层操作一致，而代理可以覆写这些操作，每个代理陷阱对应一个命名和参数都相同的Reflect方法。 
 
-![代理和反射](http://note.youdao.com/yws/res/18292/WEBRESOURCEc22ab214e4f839061348f3d25fa6fac4?ynotemdtimestamp=1598930852161)
+![代理和反射.jpeg](https://i.loli.net/2020/09/01/ImL5r6jD1oiKVY3.jpg)
 
 **关于Proxy和Object.defineProperty()对于数组的劫持**
 
@@ -558,7 +558,7 @@ map.set(null, 2)
 
 <br>
 
-![github](https://note.youdao.com/yws/res/18257/WEBRESOURCE6a610a76fada1879d03ae859fa3e7703?ynotemdtimestamp=1598930852161)
+![数组劫持.png](https://i.loli.net/2020/09/01/Zc5IisVyNvtzXeT.png)
 
     - 常见拦截器:(详细见Demo)
 

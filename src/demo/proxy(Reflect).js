@@ -159,3 +159,16 @@ let proxy = new Proxy(user, {
         return Reflect.constructd(target, arguments, newTarget)
     }
 })
+
+class Test {
+    constructor() {}
+}
+
+let proxy = new Proxy(Test, {
+    construct(target, argList, newTarget) {
+        console.log(target === Test, 'target === Test') // true
+        console.log(newTarget === proxy, 'newTarget') // true
+    }
+})
+
+const test = new proxy()
