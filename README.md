@@ -302,6 +302,8 @@ console, log(ws) // { imooc:"wanghaoyu" }
 
 > 当一个对象除了WeakSet被引用到时候就会被垃圾回收。
 
+---
+
 * Map
 
 > ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。也就是说，Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。如果你需要“键值对”的数据结构，Map 比 Object 更合适。
@@ -405,6 +407,8 @@ map.set(null, 2)
 
     - WeakMap的键名所指向的对象，不计入垃圾回收机制，弱引用。
 
+---
+
 * String
     - Unicode表示法: 只要将码点放入大括号，就能正确解读该字符。
 
@@ -431,6 +435,8 @@ map.set(null, 2)
     - String.prototype.repeat()
 
     > repeat方法返回一个新字符串，表示将原字符串重复n次。
+
+---
 
 * RegExp
 
@@ -463,7 +469,71 @@ map.set(null, 2)
 
     > ES6为正则表达式添加了u修饰符，含义为“Unicode模式”，用来正确处理大于 \uFFFF 的Unicode字符。也就是说，会正确处理四个字节的UTF-16编码。
 
-* 类与继承
+---
+
+* Number
+
+    - 二进制与八进制
+
+    >ES6 提供了二进制和八进制数值的新的写法，分别用前缀0b（或0B）和0o（或0O）表示。
+
+    - Number新增方法
+        + Number.isFinite()
+
+        > 用来检查一个数值是否为有限的（finite），即不是Infinity。
+
+        + Number.isNaN()
+
+        > 用来检查一个值是否为NaN。
+
+        + Number.parseInt()/Number.parseFloat()
+
+        > 将window对象的parseInt(),parseFloat()移植到了Number对象上。
+
+        + Number.isInteger()
+
+        
+
+        > 判断是否是整数。
+
+        + Number.MAX_SAFE_INTEGER/Number.MIN_SAFE_INTEGER
+
+        > 最大安全整数和最小安全整数。
+
+        + Number.isSafeInteger()
+
+        
+
+        > 判断是否是安全范围内的Number。
+
+    
+
+    - Math扩展
+        + Math.trunc()
+
+        > 去除一个数的小数部分，返回整数部分。
+        >> 它与parseInt的区别是:
+        >> Number.parseInt()并不会对传入的数值进行隐式类型转换。
+        >> 而Math.trunc()会对传入的Number进行隐式类型转换。
+
+        + Math.sign()
+
+        > 方法用来判断一个数到底是正数、负数、还是零。对于非数值，会先将其转换为数值。
+
+        > 它会返回五种值。
+
+        >> 参数为正数，返回+1
+        >> 参数为负数，返回-1
+        >> 参数为 0，返回0
+        >> 参数为-0，返回-0
+        >> 其他值，返回NaN
+
+        + Math.cbrt()
+
+        > 计算一个数的立方根。
+
+    
+
 * Proxy与Reflect
 * Promise
 * Generator
