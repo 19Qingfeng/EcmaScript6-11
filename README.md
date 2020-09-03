@@ -734,9 +734,9 @@ const promise = new Promise(function(resolve, reject) {
 
         > 参数 promise 数组中的任何一个 Promise 对象如果变为 resolve 或者 reject 的话， 该函数就会返回，并使用这个 Promise 对象的值进行 resolve 或者 reject。
 
-    - 实现Promise.all():内部指针思想，判断长度resolve。
+* 实现Promise.all(): 内部指针思想，判断长度resolve。
 
-    - 实现一个简单Promise:commit慢慢完善。
+* 实现一个Promise:commit慢慢完善。
 
         
 
