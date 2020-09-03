@@ -738,11 +738,163 @@ const promise = new Promise(function(resolve, reject) {
 
 * 实现一个Promise:commit慢慢完善。
 
-        
+---   
+
+## Generator
+
+> 通俗的讲 Generators 是可以用来控制迭代器的函数。它们可以暂停，然后在任何时候恢复。经常配合Iterator(迭代器)使用。
+
+生成器是一种返回迭代的函数，（其实生成器函数也就是返回了一个iterator对象）。通过function关键字后边的星号(*)来表示，函数中存在新的关键字yield。星号可以紧挨着function关键字，也可以在中间添加一个空格。
+
+Generator方法调用返回的是一个对象，对用拥有next方法，next方法调用返回一个对象，对用拥有done和value。
+
+其实它返回的这种结构就是和Iterator一样的(通过next方法调用)，也就是说Generator的返回值就是一个Iterator的迭代器对象。
+
+所以定义[Symbol.iterator]方法的时候，可以自己手动实现next方法，也可配置Generator方法和yield关键字返回的Iterator对象进行实现。（生成器函数返回的对象已经根据yield为我们写好next方法）。
+
+``` 
+// 生成器函数
+function *createIterator() {
+    yield 1;
+    yield 2;
+    yield 3;
+}
+
+// 生成器函数和普通函数调用一致，只不过返回的是一个迭代器
+let iterator = createIterator()
+console.log(iterator.next().value) // 1
+console.log(iterator.next().value) // 2
+console.log(iterator.next().value) // 3
+console.log(iterator.next().value) // undefined
+```
+
+> 生成器函数每当执行一次next方法才会继续执行下一次yield。 
+
+> 也就是说第一次调用next方法，会执行到第一次yield语法结束。next方法第一次yield后的表达式。第二次调用next方法顺着上次结束的地方开始执行。
+
+* 关于 yield 表达式，要熟记几个知识点：
+
+    1. yield 表达式的返回值是 undefined，但是遍历器对象的 next 方法可以修改这个默认值。
+
+    2. yield * 是委托给另一个遍历器对象或者可遍历对象。
 
     
 
-* Generator
-* Iterator
+    3. Generator 对象的 next 方法，遇到 yield 就暂停，并返回一个对象，这个对象包括两个属性：value 和 done。(符合Iterator的迭代器协议格式)
+
+* Generator 对象有几个方法，next、return、throw。
+
+    1. -next([value])
+
+    Generator 对象通过 next方法来获取每一次遍历的结果，这个方法返回一个对象，这个对象包含两个属性：value 和 done。value 是指当前程序的运行结果，done 表示遍历是否结束。
+
+    其实 next 是可以接受参数的，这个参数可以让你在 Generator 外部给内部传递数据，而这个参数就是作为 yield 的返回值。
+
+    也就是 next 方法接收的参数是作为上一次yield语句的返回值。
+
+``` 
+    function* gen() {
+        var val = 100
+        while (true) {
+            console.log( `before ${val}` )
+            val = yield val
+            console.log( `return ${val}` )
+        }
+    }
+
+    var g = gen()
+    console.log(g.next(20).value) // 第一次调用 传入的20是上一次yield表达式的返回值，没什么用
+    // before 100
+    // 100
+    // 第二次调用next 第一次的30作为了yield val 表达式的返回值
+    // 所以打印出来了30
+    console.log(g.next(30).value) 
+    // return 30
+    // before 30
+    // 30
+    // 同理
+    console.log(g.next(40).value)
+    // return 40
+    // before 40
+    // 40
+    ```
+
+    > 如果对上面的话和代码不理解，可以把 console.log(g.next(30).value) 和 console.log(g.next(40).value) 注释掉。你会发现 只输出了 before 100 和 100，这是为什么呢？下面我们来还原下这段代码的执行过程：
+
+    > g.next(20) 这句代码会执行 gen 内部的代码，遇到第一个 yield 暂停。所以 console.log( before ${val} ) 执行输出了 before 100 ，此时的 val 是 100，所以执行到 yield val 返回了 100，注意 yield val 并没有赋值给 val。
+
+    > g.next(30) 这句代码会继续执行 gen 内部的代码，也就是 val = yield val 这句，因为 next 传入了 30，所以 yield val 这个返回值就是 30，因此 val 被赋值 30，执行到 console.log( return ${val} ) 输出了 30，此时没有遇到 yield 代码继续执行，也就是 while 的判断，继续执行 console.log( before ${val} ) 输出了 before 30 ，再执行遇到了 yield val 程序暂停。
+
+    > g.next(40) 重复步骤 2。
+
+    2. return()
+
+    return 方法可以让 Generator 遍历终止，有点类似 for 循环的 break。提前让迭代终止。
+
+``` 
+    function* gen() {
+        yield 1
+        yield 2
+        yield 3
+    }
+
+    var g = gen()
+
+    console.log(g.next()) // {value: 1, done: false}
+    console.log(g.return()) // {value: undefined, done: true}
+    console.log(g.next()) // {value: undefined, done: true}
+    ```
+
+    从 done 可以看出代码执行已经结束。
+
+    当然 return 也可以传入参数，作为返回的 value 值。(注意return当时done已经是true，所以无法被迭代。)
+
+``` 
+    function* gen() {
+        yield 1
+        yield 2
+        yield 3
+    }
+
+    var g = gen()
+
+    console.log(g.next()) // {value: 1, done: false}
+    console.log(g.return(100)) // {value: 100, done: true}
+    console.log(g.next()) // {value: undefined, done: true}
+```
+
+    3. throw()
+
+    可以通过 throw 方法在 Generator 外部控制内部执行的“终断”。
+
+``` 
+function* gen() { while (true) { try { yield 42 } catch (e) { console.log(e.message) } } }
+
+let g = gen()
+console.log(g.next()) // { value: 42, done: false }
+console.log(g.next()) // { value: 42, done: false }
+console.log(g.next()) // { value: 42, done: false }
+// 中断操作
+g.throw(new Error('break'))
+
+console.log(g.next()) // {value: undefined, done: true}
+```
+
+#### 应用场景
+
+1. 解决异步问题。
+
+2. 逢7小游戏。
+
+3. 生成迭代器。
+
+> (Generator生成的其实就一个可迭代的对象，说白了就是满足可迭代协议的对象。)
+> 配合Iterator这讲去理解可迭代协议和迭代器协议。
+
+4. 委托生成器
+
+> 深入浅出ES6，等完善Generator和Iterator的笔记。
+
+## Iterator
 
 </font>
