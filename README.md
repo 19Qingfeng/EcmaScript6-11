@@ -8,9 +8,11 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 ## EcmaScript6
 
+---
+
 <font size=2 >
 
-* 块级作用域，let，const。(1.js)
+## 块级作用域，let，const。(1.js)
 
     1. let
         1. let 声明的全局变量不是全局对象window的属性
@@ -32,7 +34,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 ---
 
-* 解构赋值(2.js)
+## 解构赋值(2.js)
 
     1. 赋值元素可以是任意可遍历的对象
 
@@ -52,7 +54,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 ---
 
-* 数组(3.js)
+## 数组(3.js)
 
     1. Es5中的一些数组方法。
         1. for循环。
@@ -102,7 +104,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 ---
 
-* Function(4.js)
+## Function(4.js)
 
     1. 默认参数,默认参数也可以结合解构赋值在进行默认值处理。(undefined or null 走默认参数)
 
@@ -125,7 +127,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 ---
 
-* Object(5.js)
+## Object(5.js)
 
     1. 属性简洁表示法。
 
@@ -148,7 +150,8 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 ---
 
-* Class(6.js)
+## Class(6.js)
+
     1. set and get关键字。
         1. 只读属性。
 
@@ -157,6 +160,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
     2. 静态方法:static关键字。
 
         > Tip:class关键字目前仅支持static声明静态方法，静态属性仍需要类.xx实现。
+
         
 
     3. 继承:extends关键字。
@@ -175,7 +179,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 > 对于面向对象编程而言，更关注类的声明、属性、方法、静态方法、继承、多态、私有属性。
 
-* Symbol
+## Symbol
 
     1. 声明方式：基本数据类型:let a = Symbol(description);
 
@@ -219,7 +223,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 ---
 
-* Set
+## Set
 
 > 在 JavaScript 里通常使用 Array 或 Object 来存储数据。但是在频繁操作数据的过程中查找或者统计并需要手动来实现，并不能简单的直接使用。 比如如何保证 Array 是去重的，如何统计 Object 的数据总数等，必须自己去手动实现类似的需求，不是很方便。 在 ES6 中为了解决上述痛点，新增了数据结构 Set 和 Map，它们分别对应传统数据结构的“集合”和“字典”。首先，我们先来学习下 Set 数据结构。
 
@@ -304,7 +308,7 @@ console, log(ws) // { imooc:"wanghaoyu" }
 
 ---
 
-* Map
+## Map
 
 > ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。也就是说，Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。如果你需要“键值对”的数据结构，Map 比 Object 更合适。
 
@@ -409,7 +413,8 @@ map.set(null, 2)
 
 ---
 
-* String
+## String
+
     - Unicode表示法: 只要将码点放入大括号，就能正确解读该字符。
 
     - 遍历器接口:ES6 为字符串添加了遍历器接口，详见Iterator一节，使得字符串可以被for...of循环遍历。
@@ -438,7 +443,7 @@ map.set(null, 2)
 
 ---
 
-* RegExp
+## RegExp
 
     - y修饰符。
 
@@ -471,7 +476,7 @@ map.set(null, 2)
 
 ---
 
-* Number
+## Number
 
     - 二进制与八进制
 
@@ -534,7 +539,7 @@ map.set(null, 2)
 
     
 
-* Proxy与Reflect
+## Proxy与Reflect
 
 > 调用new Proxy()可以创建代替其他目标(target)对象的代理，它虚拟化了目标，所以两者看起来功能一致。 
 
@@ -598,7 +603,145 @@ map.set(null, 2)
 
     > new 调用constructor时触发constructor陷阱。target被代理的class类,argumentList:参数列表，array。newTarget:new 调用时命令指向的构造函数(new实例时候的构造函数)。
 
-* Promise
+---
+
+## Promise
+
+> JS是单线程的
+
+> 就是同一个时间只能处理一个任务。就类似生活中的去超市排队结账，正常情况下，一位收银员只能为一位顾客结账，其他顾客需要在后面排队等候。
+
+> 为什么 JS 是单线程的？作为浏览器脚本语言，JavaScript 的主要用途是与用户互动，以及操作 DOM 。这决定了它只能是单线程，否则会带来很复杂的同步问题。比如，假定 JavaScript同时有两个线程，一个线程在某个 DOM 节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？
+
+> 单线程就意味着，所有任务都需要排队，前一个任务结束，才能执行后一个任务。如果前一个任务耗时很长，那么后一个任务就不得不一直等待，于是乎，JS 设计者们把所有任分成两类，同步和异步。
+
+> 同步：只有前一个任务执行完毕，才能执行后一个任务
+> 异步：当同步任务执行到某个 WebAPI 时，就会触发异步操作，此时浏览器会单独开线程去处理这些异步任务。
+
+![promise1.png](https://i.loli.net/2020/09/03/iHF8OGXPefJU1t4.png)
+
+> 关于同步任务和异步任务忘深点去讲就是一次脚本执行后会按照顺序执行完成所有同步任务，而后所有异步任何会进入Event Queue, 按照Event Loop运行规则进行一次一次Loop取出任务进行线程执行。(一次EventLoop执行一个macor和所有micor)。
+
+![eventloop.png](https://i.loli.net/2020/09/03/hfeLSPOyAuZaz2W.png)
+
+#### AJAX原理
+
+> Ajax 即“Asynchronous Javascript And XML”（异步 JavaScript 和 XML），是指一种创建交互式、快速动态网页应用的网页开发技术，无需重新加载整个网页的情况下，能够更新部分网页的技术。通过在后台与服务器进行少量数据交换，Ajax 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+
+``` 
+// 创建 XMLHttpRequest 对象
+const url = 'http://jsonplaceholder.typicode.com/users'
+let xmlhttp
+if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp = new XMLHttpRequest()
+} else { // code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+}
+
+// 发送请求
+xmlhttp.open("GET", url, true)
+xmlhttp.send()
+
+// 服务端响应
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        //    console.log(xmlhttp.responseText)
+        let obj = JSON.parse(xmlhttp.responseText)
+        console.log(obj)
+    }
+}
+```
+
+#### Callback Hell
+
+JavaScipt 中的许多操作都是异步的，我们把上面的Ajax封装成一个函数：
+
+``` 
+function ajax(url, callback) {
+    let xmlhttp
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest()
+    } else { // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+    }
+    // 发送请求
+    xmlhttp.open("GET", url, true)
+    xmlhttp.send()
+    // 服务端响应
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            //    console.log(xmlhttp.responseText)
+            let obj = JSON.parse(xmlhttp.responseText)
+            callback(obj)
+        }
+    }
+}
+
+// call hell
+ajax('static/a.json', res => {
+    console.log(res)
+    ajax('static/b.json', res => {
+        console.log(res)
+        ajax('static/c.json', res => {
+            console.log(res)
+        })
+    })
+})
+```
+
+#### Promise基本语法
+
+> Promise 就是为了解决“回调地狱”问题的，它可以将异步操作的处理变得很优雅。回调地狱，代码难以维护， 常常第一个的函数的输出是第二个函数的输入这种现象promise可以支持多个并发的请求，获取并发请求中的数据这个promise可以解决异步的问题，本身不能说promise是异步的。
+
+``` 
+const promise = new Promise(function(resolve, reject) {
+    // ... some code
+
+    if ( /* 异步操作成功 */ ) {
+        resolve(value)
+    } else {
+        reject(error)
+    }
+})
+```
+
+    - Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject。它们是两个函数，由 JavaScript 引擎提供，不用自己部署。
+
+        - 处理结果正常的话，调用resolve(处理结果值)，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去
+
+        - 处理结果错误的话，调用reject(Error对象)，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去
+
+    - Promise存在三种状态，一旦确定状态是无法修改的。
+
+    
+
+![promise2.png](https://i.loli.net/2020/09/03/KQRrZXcxouNi9s6.png)
+
+    - Promise用法:
+        1. Promise.prototype.then()
+
+        2. Promise.prototype.catch()
+
+        3. Promise.resolve()
+
+        4. Promise.reject()
+
+        5. Promise.all()
+
+        > Promise.all 生成并返回一个新的 Promise 对象，所以它可以使用 Promise 实例的所有方法。参数传递promise数组中所有的 Promise 对象都变为resolve的时候，该方法才会返回， 新创建的 Promise 则会使用这些 promise 的值。
+
+        6. Promise.race()
+
+        > 参数 promise 数组中的任何一个 Promise 对象如果变为 resolve 或者 reject 的话， 该函数就会返回，并使用这个 Promise 对象的值进行 resolve 或者 reject。
+
+    - 实现Promise.all():内部指针思想，判断长度resolve。
+
+    - 实现一个简单Promise:commit慢慢完善。
+
+        
+
+    
+
 * Generator
 * Iterator
 
