@@ -32,6 +32,32 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
         2. const 实际上保证的并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动。</font>
 
+**小Tips:**
+
+> let和const声明的顶层变量并不会挂载在window上，而var会。
+
+``` 
+ // let声明的变量并不会挂载在window下
+        // let test = 3
+
+        // 而var会
+        var test = 6
+
+        let a = {
+            test: 1,
+            getTest() {
+                return this.test
+            },
+            getArrowTest: () => {
+                return this.test
+            }
+        }
+
+        console.log(a.getTest(), 'getTest')
+        // var声明test会打印6 let声明test会打印undefined
+        console.log(a.getArrowTest(), 'getTest')
+```
+
 ---
 
 ## 解构赋值(2.js)
@@ -896,5 +922,63 @@ console.log(g.next()) // {value: undefined, done: true}
 > 深入浅出ES6，等完善Generator和Iterator的笔记。
 
 ## Iterator
+
+> MDN：处理集合中的每个项是很常见的操作。JavaScript 提供了许多迭代集合的方法，从简单的for循环到map()和filter()。迭代器和生成器将迭代的概念直接带入核心语言，并提供了一种机制来自定义for...of循环的行为。
+
+总结一下：
+
+* 接口机制，为各种不同的数据结构提供统一的访问机制。
+* 主要提供for of 循环
+* 其实Iterator迭代器对象本质就是可以使不可以迭代的对象变成可迭代对象。
+
+迭代器对象是一个特殊的接口，所有迭代器对象都有一个next()方法，每次调用都返回一个结果对象。结果对象有两个属性：一个是value表示下一次返回的值，另一个是Boolean类型的值done，当没有更多可返回的数据时返回true。迭代器对象内部本质其实就是存在一个指针，用来指向集合中值的位置。 
+
+其实迭代器可以看作就是一个对象，这个对象存在一个next方法。next方法有两个属性一个是value一个是done。
+
+1. 迭代器协议
+
+> { value:any, done: Boolean } 或者使用 Generator生成器直接生成满足迭代器协议对象(yield)
+
+| 属性 | 值                                                  | 必选 |
+|------|-----------------------------------------------------|-----|
+| next | 返回一个对象的无参函数，被返回对象拥有两个属性：done 和 value | Y   |
+
+这是两个概念：可迭代协议、迭代器协议。通俗的讲，迭代器协议要求符合以下条件：
+
+* 首先，它是一个对象
+* 其次，这个对象包含一个无参函数 next
+* 最后，next 返回一个对象，对象包含 done 和 value 属性。其中 done 表示遍历是否结束，value 返回当前遍历的值。
+
+2. 可迭代协议
+
+> Symbol. Iterator
+
+可迭代协议允许 JavaScript 对象去定义或定制它们的迭代行为, 例如（定义）在一个 for..of 结构中什么值可以被循环（得到）。一些内置类型都是内置的可迭代类型并且有默认的迭代行为, 比如 Array or Map, 另一些类型则不是 (比如Object) 。
+
+为了变成可迭代对象， 一个对象必须实现 @@iterator 方法, 意思是这个对象（或者它原型链 prototype chain 上的某个对象）必须有一个名字是 Symbol.iterator 的属性:
+
+| 属性              | 值                                      | 必选 |
+|-------------------|-----------------------------------------|-----|
+| [Symbol.iterator] | 返回一个对象的无参函数，被返回对象符合迭代器协议 | Y   |
+
+		
+
+**如果让一个对象是可遍历的，就要遵守可迭代协议，该协议要求对象要部署一个以 Symbol.iterator 为 key 的键值对，而 value 就是一个无参函数，这个函数返回的对象要遵守迭代器协议。**
+
+#### 自定义可迭代
+
+1. 满足可迭代协议。
+
+存在[Symbol.iterator]属性。
+
+2. 满足迭代器协议。
+
+[Symbol.iterator]属性要求返回一个可迭代的对象。
+
+可迭代的对象可以使用我们源生实现，也可以使用Generator生成器函数实现。（详情参照Demo）
+
+* 自行实现需要[Symbol.iterator]方法返回一个对象，其实迭代器可以看作就是一个对象，这个对象存在一个next方法。next方法有两个属性一个是value一个是done。(函数内部闭包)
+
+* 使用Generator实现[Symbol.iterator]，天然配合Generator和yield关键字进行生成可迭代对象。(他实质帮我们生成的自行实现需要的可迭代对象：拥有next方法，next方法每次返回value和done根据yield关键字作为指针)。
 
 </font>
