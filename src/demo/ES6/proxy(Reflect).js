@@ -165,7 +165,7 @@ class Test {
 }
 
 let proxy = new Proxy(Test, {
-    construct(target, argList, newTarget) {
+    construct: (target, argList, newTarget) => {
         console.log(target === Test, 'target === Test') // true
         console.log(newTarget === proxy, 'newTarget') // true
     }

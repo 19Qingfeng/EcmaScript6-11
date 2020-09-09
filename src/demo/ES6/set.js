@@ -15,11 +15,10 @@ const delArr2 = new Set([...arr2, arr3])
 const arr4 = [8, 9, 10]
 const arr5 = [11, 7, 9]
 
-const set4 = new Set(arr4)
-const set5 = new Set(arr5)
-const mergeSet = arr4.filter(i => {
-    return set5.has(i)
-})
+let s1 = new Set(arr4)
+let s2 = new Set(arr5)
+let result = new Set(arr4.filter(item => s2.has(item)))
+console.log(Array.from(result))
 
 
 // 差集 
