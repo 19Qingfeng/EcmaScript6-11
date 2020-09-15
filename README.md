@@ -6,7 +6,7 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 
 <br>
 
-## EcmaScript6
+## EcmaScript 6
 
 <font size=2 >
 
@@ -43,5 +43,17 @@ EcmaScript6-11常用语法以及场景Demo。<br>
 16. [Iterator](https://juejin.im/post/6870299484929130509/)
 
 17. [Module](https://juejin.im/post/6870301270901538830/)
+
+---
+
+## EcmaScript 7
+
+1. [Array扩展](https://juejin.im/post/6872594958155513864/)
+
+Array.prototype.includes(ele, index)
+
+2. [幂运算符](https://juejin.im/post/6872595535560671246/)
+
+a**b 求值：a的b次幂
 
 </font>
